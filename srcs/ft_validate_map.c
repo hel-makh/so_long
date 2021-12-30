@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 18:03:53 by hel-makh          #+#    #+#             */
-/*   Updated: 2021/12/29 19:14:46 by hel-makh         ###   ########.fr       */
+/*   Updated: 2021/12/30 18:23:19 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 static void	ft_initialize_map(t_map	*map)
 {
-	map->empty_spaces = 0;
-	map->walls = 0;
+	map->width = 0;
+	map->height = 0;
 	map->collectibles = 0;
 	map->exit = 0;
 	map->start_position = 0;
+	map->game_ended = 0;
 }
 
 static int	ft_validate_walls(t_map *map, char *parsed_map)
@@ -30,7 +31,6 @@ static int	ft_validate_walls(t_map *map, char *parsed_map)
 	{
 		if (parsed_map[i] != WALL)
 			return (0);
-		map->walls ++;
 		i ++;
 	}
 	return (1);
@@ -46,17 +46,17 @@ static int	ft_validate_components(t_map *map, char *parsed_map)
 		if ((i == 0 || !parsed_map[i + 1])
 			&& parsed_map[i] != WALL)
 			return (0);
-		if (parsed_map[i] == EMPTY_SPACE)
-			map->empty_spaces ++;
-		else if (parsed_map[i] == WALL)
-			map->walls ++;
-		else if (parsed_map[i] == COLLECTIBLE)
+		if (parsed_map[i] == COLLECTIBLE)
 			map->collectibles ++;
 		else if (parsed_map[i] == EXIT)
 			map->exit ++;
 		else if (parsed_map[i] == START_POSITION)
+		{
 			map->start_position ++;
-		else
+			if (map->start_position > 1)
+				parsed_map[i] = EMPTY_SPACE;
+		}
+		else if (parsed_map[i] != EMPTY_SPACE && parsed_map[i] != WALL)
 			return (0);
 		i ++;
 	}
@@ -65,23 +65,19 @@ static int	ft_validate_components(t_map *map, char *parsed_map)
 
 int	ft_valid_map(t_map *map)
 {
-	size_t	map_width;
-	size_t	i;
-
 	ft_initialize_map(map);
-	i = 0;
-	while (map->parsed_map[i])
+	while (map->parsed_map[map->height])
 	{
-		if (i == 0)
-			map_width = ft_strlen(map->parsed_map[i]);
-		else if (ft_strlen(map->parsed_map[i]) != map_width)
+		if (map->height == 0)
+			map->width = ft_strlen(map->parsed_map[map->height]);
+		else if (ft_strlen(map->parsed_map[map->height]) != map->width)
 			return (0);
-		if ((i == 0 || !map->parsed_map[i + 1])
-			&& !ft_validate_walls(map, map->parsed_map[i]))
+		if ((map->height == 0 || !map->parsed_map[map->height + 1])
+			&& !ft_validate_walls(map, map->parsed_map[map->height]))
 			return (0);
-		else if (!ft_validate_components(map, map->parsed_map[i]))
+		else if (!ft_validate_components(map, map->parsed_map[map->height]))
 			return (0);
-		i ++;
+		map->height ++;
 	}
 	if (map->exit < 1 || map->collectibles < 1 || map->start_position < 1)
 		return (0);

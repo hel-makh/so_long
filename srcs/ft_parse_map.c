@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 18:07:46 by hel-makh          #+#    #+#             */
-/*   Updated: 2021/12/29 18:07:48 by hel-makh         ###   ########.fr       */
+/*   Updated: 2021/12/30 15:29:00 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ void	ft_parse_map(char *file, char ***map)
 	{
 		line = get_next_line(fd);
 		if (!line)
-			break;
+			break ;
 		lines = ft_strnjoin(lines, line, ft_strlen(line));
 		line = ft_free(line);
 	}
+	close(fd);
 	*map = ft_split(lines, '\n');
 	lines = ft_free(lines);
 }

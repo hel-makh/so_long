@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 21:44:54 by hel-makh          #+#    #+#             */
-/*   Updated: 2021/12/29 23:24:13 by hel-makh         ###   ########.fr       */
+/*   Updated: 2021/12/30 18:33:20 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,24 @@ static void	ft_get_player_pos(int *x, int *y, t_vars *vars)
 	}
 }
 
-static void ft_move_to(char *current_pos, char *new_pos, t_vars *vars)
+static void	ft_move_to(char *current_pos, char *new_pos, t_vars *vars)
 {
-    if (*new_pos == EMPTY_SPACE
-        || *new_pos == COLLECTIBLE
-        || (*new_pos == EXIT && vars->map.collectibles == 0))
-    {
-        if (*new_pos == COLLECTIBLE)
-            vars->map.collectibles --;
-        else if (*new_pos == EXIT)
-	    	ft_exit_program(vars);
-        *current_pos = EMPTY_SPACE;
-        *new_pos = START_POSITION;
-    }
+	if (*new_pos == EMPTY_SPACE
+		|| *new_pos == COLLECTIBLE
+		|| (*new_pos == EXIT && vars->map.collectibles == 0))
+	{
+		if (*new_pos == COLLECTIBLE)
+			vars->map.collectibles --;
+		else if (*new_pos == EXIT)
+			vars->map.game_ended = 1;
+		*current_pos = EMPTY_SPACE;
+		*new_pos = START_POSITION;
+		vars->map.movements ++;
+		printf("Current movements: %d\n", vars->map.movements);
+	}
 }
 
-void	ft_key_move(int keycode, t_vars *vars)
+static void	ft_key_move(int keycode, t_vars *vars)
 {
 	int	i;
 	int	j;
@@ -61,4 +63,20 @@ void	ft_key_move(int keycode, t_vars *vars)
 	else if (keycode == KEY_S)
 		ft_move_to(&vars->map.parsed_map[i][j],
 			&vars->map.parsed_map[i + 1][j], vars);
+}
+
+int	key_hook(int keycode, t_vars *vars)
+{
+	if (keycode == KEY_ESC)
+		ft_exit_program(EXIT_SUCCESS, vars);
+	if ((keycode != KEY_A && keycode != KEY_D
+		&& keycode != KEY_W && keycode != KEY_S)
+		|| vars->map.game_ended)
+		return (0);
+	ft_key_move(keycode, vars);
+	mlx_destroy_image(vars->mlx, vars->img.img);
+	ft_render_images(vars);
+	if (vars->map.game_ended)
+		printf("You won!");
+	return (1);
 }
