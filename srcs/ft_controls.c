@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 21:44:54 by hel-makh          #+#    #+#             */
-/*   Updated: 2021/12/30 18:33:20 by hel-makh         ###   ########.fr       */
+/*   Updated: 2021/12/31 11:46:56 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,22 +47,22 @@ static void	ft_move_to(char *current_pos, char *new_pos, t_vars *vars)
 
 static void	ft_key_move(int keycode, t_vars *vars)
 {
-	int	i;
-	int	j;
+	int	x;
+	int	y;
 
-	ft_get_player_pos(&i, &j, vars);
+	ft_get_player_pos(&x, &y, vars);
 	if (keycode == KEY_A)
-		ft_move_to(&vars->map.parsed_map[i][j],
-			&vars->map.parsed_map[i][j - 1], vars);
+		ft_move_to(&vars->map.parsed_map[x][y],
+			&vars->map.parsed_map[x][y - 1], vars);
 	else if (keycode == KEY_D)
-		ft_move_to(&vars->map.parsed_map[i][j],
-			&vars->map.parsed_map[i][j + 1], vars);
+		ft_move_to(&vars->map.parsed_map[x][y],
+			&vars->map.parsed_map[x][y + 1], vars);
 	else if (keycode == KEY_W)
-		ft_move_to(&vars->map.parsed_map[i][j],
-			&vars->map.parsed_map[i - 1][j], vars);
+		ft_move_to(&vars->map.parsed_map[x][y],
+			&vars->map.parsed_map[x - 1][y], vars);
 	else if (keycode == KEY_S)
-		ft_move_to(&vars->map.parsed_map[i][j],
-			&vars->map.parsed_map[i + 1][j], vars);
+		ft_move_to(&vars->map.parsed_map[x][y],
+			&vars->map.parsed_map[x + 1][y], vars);
 }
 
 int	key_hook(int keycode, t_vars *vars)
@@ -74,7 +74,6 @@ int	key_hook(int keycode, t_vars *vars)
 		|| vars->map.game_ended)
 		return (0);
 	ft_key_move(keycode, vars);
-	mlx_destroy_image(vars->mlx, vars->img.img);
 	ft_render_images(vars);
 	if (vars->map.game_ended)
 		printf("You won!");

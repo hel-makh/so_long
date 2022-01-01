@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 15:03:16 by hel-makh          #+#    #+#             */
-/*   Updated: 2021/12/30 18:22:08 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/01 01:27:41 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,42 +34,46 @@
 # define EXIT 69
 # define START_POSITION 80
 
-# define SPACE_IMG "./textures/space.png"
-# define WALL_IMG "./textures/wall.png"
-# define COLLECTIBLE_IMG "./textures/collectible.png"
-# define EXIT_IMG "./textures/exit.png"
-# define PLAYER_IMG "./textures/player.png"
+# define SPACE_IMG "./assets/space.png"
+# define WALL_IMG "./assets/wall.png"
+# define GEMSTONE_IMG "./assets/gemstone.png"
+# define R_EXIT_IMG "./assets/right_exit.png"
+# define L_EXIT_IMG "./assets/left_exit.png"
+# define PLAYER_IMG "./assets/miner1.png"
 
 typedef struct s_win {
-	void	*mlx_win;
-	int		width;
-	int		height;
+	void		*mlx_win;
+	int			width;
+	int			height;
 }	t_win;
 
+typedef struct s_assets {
+	void		*empty_space;
+	void		*wall;
+	void		*gemstone;
+	void		*right_exit;
+	void		*left_exit;
+	void		*player;
+	int			width;
+	int			height;
+}	t_assets;
+
 typedef struct s_map {
-	char	**parsed_map;
-	int		width;
-	int		height;
-	int		collectibles;
-	int		exit;
-	int		start_position;
-	int		movements;
-	int		game_ended;
+	char		**parsed_map;
+	int			collectibles;
+	int			exit;
+	int			start_position;
+	int			movements;
+	int			game_ended;
+	int			width;
+	int			height;
+	t_assets	assets;
 }	t_map;
 
-typedef struct s_image {
-	void	*img;
-	int		x_pos;
-	int		y_pos;
-	int		width;
-	int		height;
-}	t_img;
-
 typedef struct s_vars {
-	void	*mlx;
-	t_win	win;
-	t_map	map;
-	t_img	img;
+	void		*mlx;
+	t_win		win;
+	t_map		map;
 }	t_vars;
 
 # define BUFFER_SIZE 1
@@ -88,7 +92,8 @@ void	ft_free_2d(char **array);
 void	ft_free_3d(char ***array);
 char	*get_next_line(int fd);
 void	ft_parse_map(char *file, char ***map);
-int		ft_valid_map(t_map *map);
+int		ft_is_map_valid(t_map *map);
+void	ft_initialize_images(t_vars *vars);
 void	ft_render_images(t_vars *vars);
 int		key_hook(int keycode, t_vars *vars);
 void	ft_exit_program(int status, t_vars *vars);

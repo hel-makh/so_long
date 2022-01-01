@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 18:03:53 by hel-makh          #+#    #+#             */
-/*   Updated: 2021/12/30 18:23:19 by hel-makh         ###   ########.fr       */
+/*   Updated: 2021/12/31 11:38:42 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 static void	ft_initialize_map(t_map	*map)
 {
-	map->width = 0;
-	map->height = 0;
 	map->collectibles = 0;
 	map->exit = 0;
 	map->start_position = 0;
+	map->movements = 0;
 	map->game_ended = 0;
+	map->width = 0;
+	map->height = 0;
 }
 
 static int	ft_validate_walls(t_map *map, char *parsed_map)
@@ -51,11 +52,7 @@ static int	ft_validate_components(t_map *map, char *parsed_map)
 		else if (parsed_map[i] == EXIT)
 			map->exit ++;
 		else if (parsed_map[i] == START_POSITION)
-		{
 			map->start_position ++;
-			if (map->start_position > 1)
-				parsed_map[i] = EMPTY_SPACE;
-		}
 		else if (parsed_map[i] != EMPTY_SPACE && parsed_map[i] != WALL)
 			return (0);
 		i ++;
@@ -63,7 +60,7 @@ static int	ft_validate_components(t_map *map, char *parsed_map)
 	return (1);
 }
 
-int	ft_valid_map(t_map *map)
+int	ft_is_map_valid(t_map *map)
 {
 	ft_initialize_map(map);
 	while (map->parsed_map[map->height])
@@ -79,7 +76,8 @@ int	ft_valid_map(t_map *map)
 			return (0);
 		map->height ++;
 	}
-	if (map->exit < 1 || map->collectibles < 1 || map->start_position < 1)
+	if (map->exit < 1 || map->collectibles < 1
+		|| map->start_position < 1 || map->start_position > 1)
 		return (0);
 	return (1);
 }
