@@ -42,8 +42,10 @@ RM				=	rm -f
 
 $(NAME):		$(OBJS) $(HEADER)
 				make -C minilibx_mms_20200219
+				mv minilibx_mms_20200219/libmlx.dylib ./libmlx.dylib
 				make bonus -C Libft
-				$(GCC) $(CFLAGS) Libft/libft.a minilibx_mms_20200219/libmlx.dylib $(OBJS) -o $(NAME)
+				mv Libft/libft.a ./libft.a
+				$(GCC) $(CFLAGS) libft.a libmlx.dylib $(OBJS) -o $(NAME)
 
 # bonus:			$(OBJS_BONUS) $(HEADER_BONUS)
 # 				$(GCC) $(CFLAGS) $(OBJS_BONUS) -o $(NAME)
@@ -51,13 +53,12 @@ $(NAME):		$(OBJS) $(HEADER)
 all:			$(NAME)
 
 clean:
-				$(RM) $(OBJS) $(OBJS_BONUS)
+				$(RM) $(OBJS) $(OBJS_BONUS) libft.a libmlx.dylib
 				make clean -C minilibx_mms_20200219
 				make clean -C Libft
 
 fclean:			clean
 				$(RM) $(NAME)
-				make fclean -C Libft
 
 re:				fclean all
 
