@@ -1,35 +1,32 @@
 SRCSDIR			=	srcs
 
-INCDIR			=	./includes
+HEADER			=	mandatory/includes/so_long.h
 
-HEADER			=	$(INCDIR)/so_long.h
-
-# HEADER_BONUS	=	$(HEADER)\
-# 					$(INCDIR)/so_long_bonus.h
+HEADER_BONUS	=	bonus/includes/so_long.h
 
 NAME			=	so_long
 
-MAIN			=	main.c
+MAIN			=	mandatory/main.c
 
-# MAIN_BONUS		=	main_bonus.c
+MAIN_BONUS		=	bonus/main.c
 
-SRCS			=	$(SRCSDIR)/ft_strcpy.c\
-					$(SRCSDIR)/ft_strnjoin.c\
-					$(SRCSDIR)/ft_free.c\
-					$(SRCSDIR)/get_next_line.c\
-					$(SRCSDIR)/ft_parse_map.c\
-					$(SRCSDIR)/ft_validate_map.c\
-					$(SRCSDIR)/ft_assets.c\
-					$(SRCSDIR)/ft_movements.c\
-					$(SRCSDIR)/ft_quit_program.c
+SRCS			=	mandatory/$(SRCSDIR)/ft_strcpy.c\
+					mandatory/$(SRCSDIR)/ft_strnjoin.c\
+					mandatory/$(SRCSDIR)/ft_free.c\
+					mandatory/$(SRCSDIR)/get_next_line.c\
+					mandatory/$(SRCSDIR)/ft_parse_map.c\
+					mandatory/$(SRCSDIR)/ft_validate_map.c\
+					mandatory/$(SRCSDIR)/ft_assets.c\
+					mandatory/$(SRCSDIR)/ft_movements.c\
+					mandatory/$(SRCSDIR)/ft_quit_program.c
 
-# SRCS_BONUS		=	$(SRCS)
+SRCS_BONUS		=	$(SRCS)
 
 OBJS			=	$(SRCS:.c=.o)\
 					$(MAIN:.c=.o)
 
-# OBJS_BONUS		=	$(SRCS_BONUS:.c=.o)\
-# 					$(MAIN_BONUS:.c=.o)
+OBJS_BONUS		=	$(SRCS_BONUS:.c=.o)\
+					$(MAIN_BONUS:.c=.o)
 
 GCC				=	cc
 
@@ -38,7 +35,7 @@ CFLAGS			=	-Wall -Wextra -Werror
 RM				=	rm -f
 
 .c.o:
-				$(GCC) $(CFLAGS) -I$(INCDIR) -c $< -o $(<:.c=.o)
+				$(GCC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
 $(NAME):		$(OBJS) $(HEADER)
 				make -C minilibx_mms_20200219
@@ -47,18 +44,22 @@ $(NAME):		$(OBJS) $(HEADER)
 				mv Libft/libft.a ./libft.a
 				$(GCC) $(CFLAGS) libft.a libmlx.dylib $(OBJS) -o $(NAME)
 
-# bonus:			$(OBJS_BONUS) $(HEADER_BONUS)
-# 				$(GCC) $(CFLAGS) $(OBJS_BONUS) -o $(NAME)
+bonus:			$(OBJS_BONUS) $(HEADER_BONUS)
+				make -C minilibx_mms_20200219
+				mv minilibx_mms_20200219/libmlx.dylib ./libmlx.dylib
+				make bonus -C Libft
+				mv Libft/libft.a ./libft.a
+				$(GCC) $(CFLAGS) libft.a libmlx.dylib $(OBJS_BONUS) -o $(NAME)
 
 all:			$(NAME)
 
 clean:
-				$(RM) $(OBJS) $(OBJS_BONUS) libft.a libmlx.dylib
+				$(RM) $(OBJS) $(OBJS_BONUS)
 				make clean -C minilibx_mms_20200219
 				make clean -C Libft
 
 fclean:			clean
-				$(RM) $(NAME)
+				$(RM) $(NAME) libft.a libmlx.dylib
 
 re:				fclean all
 
