@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit_program.c                                  :+:      :+:    :+:   */
+/*   ft_quit_program.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 22:23:18 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/01/01 11:28:47 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/01 12:15:15 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	ft_window_destroyed(t_vars *vars)
 {
-	ft_exit_program(EXIT_SUCCESS, vars);
+	ft_quit_program(EXIT_SUCCESS, vars);
 	return (EXIT_SUCCESS);
 }
 
-void	ft_exit_program(int status, t_vars *vars)
+void	ft_quit_program(int status, t_vars *vars)
 {
 	if (status == EXIT_SUCCESS)
 	{

@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 15:03:16 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/01/01 11:46:46 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/01 12:15:25 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,10 @@ void	ft_free_3d(char ***array);
 char	*get_next_line(int fd);
 void	ft_parse_map(char *file, char ***map);
 int		ft_is_map_valid(t_map *map);
-void	ft_initialize_images(t_vars *vars);
-void	ft_render_images(t_vars *vars);
+void	ft_initialize_assets(t_vars *vars);
+void	ft_render_assets(t_vars *vars);
 int		key_hook(int keycode, t_vars *vars);
 int		ft_window_destroyed(t_vars *vars);
-void	ft_exit_program(int status, t_vars *vars);
+void	ft_quit_program(int status, t_vars *vars);
 
 #endif

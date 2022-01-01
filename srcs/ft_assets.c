@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_images.c                                        :+:      :+:    :+:   */
+/*   ft_assets.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 21:07:01 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/01/01 11:48:23 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/01 12:15:43 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-static void	ft_put_image(char component, int x, int y, t_vars *vars)
+static void	ft_put_asset(char component, int x, int y, t_vars *vars)
 {
 	if (component != WALL)
 		mlx_put_image_to_window(vars->mlx, vars->win.mlx_win,
@@ -37,7 +37,7 @@ static void	ft_put_image(char component, int x, int y, t_vars *vars)
 			vars->map.assets.player, x, y);
 }
 
-void	ft_render_images(t_vars *vars)
+void	ft_render_assets(t_vars *vars)
 {
 	int	i;
 	int	j;
@@ -52,7 +52,7 @@ void	ft_render_images(t_vars *vars)
 		j = 0;
 		while (vars->map.parsed_map[i][j])
 		{
-			ft_put_image(vars->map.parsed_map[i][j], x, y, vars);
+			ft_put_asset(vars->map.parsed_map[i][j], x, y, vars);
 			x += vars->map.assets.width;
 			j ++;
 		}
@@ -61,7 +61,7 @@ void	ft_render_images(t_vars *vars)
 	}
 }
 
-void	ft_initialize_images(t_vars *vars)
+void	ft_initialize_assets(t_vars *vars)
 {
 	vars->map.assets.empty_space = mlx_png_file_to_image(vars->mlx,
 			SPACE_IMG, &vars->map.assets.width, &vars->map.assets.height);
@@ -80,6 +80,6 @@ void	ft_initialize_images(t_vars *vars)
 		|| !vars->map.assets.left_exit || !vars->map.assets.player)
 	{
 		perror("Error\nCouldn't load assets");
-		ft_exit_program(EXIT_FAILURE, vars);
+		ft_quit_program(EXIT_FAILURE, vars);
 	}
 }
