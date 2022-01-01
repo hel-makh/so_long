@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 18:07:46 by hel-makh          #+#    #+#             */
-/*   Updated: 2021/12/30 15:29:00 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/01 11:46:42 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@ void	ft_parse_map(char *file, char ***map)
 	char	*lines;
 
 	fd = open(file, O_RDONLY);
+	if (fd == -1)
+	{
+		perror("Error\nCouldn't open map");
+		exit(EXIT_FAILURE);
+	}
 	lines = ft_strdup("");
 	while (1)
 	{

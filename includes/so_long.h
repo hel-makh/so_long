@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 15:03:16 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/01/01 01:27:41 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/01 11:46:46 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
-// # include <mlx.h>
 // # include "../minilibx_opengl_20191021/mlx.h"
 # include "../minilibx_mms_20200219/mlx.h"
 # include "../Libft/libft.h"
@@ -96,6 +95,7 @@ int		ft_is_map_valid(t_map *map);
 void	ft_initialize_images(t_vars *vars);
 void	ft_render_images(t_vars *vars);
 int		key_hook(int keycode, t_vars *vars);
+int		ft_window_destroyed(t_vars *vars);
 void	ft_exit_program(int status, t_vars *vars);
 
 #endif

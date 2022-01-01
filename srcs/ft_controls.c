@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 21:44:54 by hel-makh          #+#    #+#             */
-/*   Updated: 2021/12/31 11:46:56 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/01 11:23:51 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,12 @@ int	key_hook(int keycode, t_vars *vars)
 	if (keycode == KEY_ESC)
 		ft_exit_program(EXIT_SUCCESS, vars);
 	if ((keycode != KEY_A && keycode != KEY_D
-		&& keycode != KEY_W && keycode != KEY_S)
+			&& keycode != KEY_W && keycode != KEY_S)
 		|| vars->map.game_ended)
 		return (0);
 	ft_key_move(keycode, vars);
 	ft_render_images(vars);
 	if (vars->map.game_ended)
-		printf("You won!");
+		printf("You won!\n");
 	return (1);
 }

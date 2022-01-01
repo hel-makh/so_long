@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 18:03:53 by hel-makh          #+#    #+#             */
-/*   Updated: 2021/12/31 11:38:42 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/01 10:47:28 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	ft_initialize_map(t_map	*map)
 	map->height = 0;
 }
 
-static int	ft_validate_walls(t_map *map, char *parsed_map)
+static int	ft_validate_walls(char *parsed_map)
 {
 	int	i;
 
@@ -67,10 +67,10 @@ int	ft_is_map_valid(t_map *map)
 	{
 		if (map->height == 0)
 			map->width = ft_strlen(map->parsed_map[map->height]);
-		else if (ft_strlen(map->parsed_map[map->height]) != map->width)
+		else if ((int)ft_strlen(map->parsed_map[map->height]) != map->width)
 			return (0);
 		if ((map->height == 0 || !map->parsed_map[map->height + 1])
-			&& !ft_validate_walls(map, map->parsed_map[map->height]))
+			&& !ft_validate_walls(map->parsed_map[map->height]))
 			return (0);
 		else if (!ft_validate_components(map, map->parsed_map[map->height]))
 			return (0);
