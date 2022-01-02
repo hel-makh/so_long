@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 13:28:15 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/01/01 16:43:47 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/02 21:47:48 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@
 #include "srcs/ft_free.c"
 #include "srcs/ft_strnjoin.c"
 #include "srcs/get_next_line.c"
+#include "srcs/ft_create_trgb.c"
 #include "srcs/ft_parse_map.c"
 #include "srcs/ft_validate_map.c"
+#include "srcs/ft_init_assets.c"
 #include "srcs/ft_assets.c"
+#include "srcs/ft_render_components.c"
 #include "srcs/ft_movements.c"
 #include "srcs/ft_quit_program.c"
 

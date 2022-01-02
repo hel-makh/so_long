@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 18:03:53 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/01/02 00:16:37 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/02 21:46:46 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,15 @@ static void	ft_initialize_map(t_map	*map)
 	map->start_position = 0;
 	map->movements = 0;
 	map->game_ended = 0;
+	map->game_over = 0;
 	map->width = 0;
 	map->height = 0;
+	map->assets.player.direction = 'R';
+	map->assets.player.frame_count = 0;
+	map->assets.enemy.frame_count = 0;
+	map->assets.player.idling = 0;
+	map->assets.player.collecting = 0;
+	map->assets.player.dying = 0;
 }
 
 static int	ft_validate_walls(char *parsed_map)
@@ -77,8 +84,7 @@ int	ft_is_map_valid(t_map *map)
 			return (0);
 		map->height ++;
 	}
-	if (map->exit < 1 || map->collectibles < 1
-		|| map->start_position < 1 || map->start_position > 1)
+	if (map->exit != 1 || map->collectibles < 1 || map->start_position != 1)
 		return (0);
 	return (1);
 }

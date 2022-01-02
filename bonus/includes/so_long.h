@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 15:03:16 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/01/02 00:14:38 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/02 21:22:24 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,33 +40,51 @@ enum e_components
 	ENEMY = 78
 };
 
-# define SPACE_IMG "assets/space.png"
-# define WALL_IMG "assets/wall.png"
-# define GEMSTONE_IMG "assets/gemstone.png"
-# define R_EXIT_IMG "assets/right_exit.png"
-# define L_EXIT_IMG "assets/left_exit.png"
-# define PLAYER_IMG "assets/miner1.png,assets/miner2.png"
-# define ENEMY_IMG "assets/enemy1.png,assets/enemy2.png"
+# define SPACE_IMG				"assets/space.png"
+# define WALL_IMG				"assets/wall.png"
+# define GEMSTONE_IMG			"assets/gemstone1.png,assets/gemstone2.png,\
+assets/gemstone3.png,assets/gemstone4.png"
+# define R_EXIT_IMG				"assets/right_exit.png"
+# define L_EXIT_IMG 			"assets/left_exit.png"
+# define R_PLAYER_IDLE_IMG		"assets/right_miner_idle1.png,assets/right_miner_idle2.png,\
+assets/right_miner_idle3.png,assets/right_miner_idle4.png"
+# define L_PLAYER_IDLE_IMG		"assets/left_miner_idle1.png,assets/left_miner_idle2.png,\
+assets/left_miner_idle3.png,assets/left_miner_idle4.png"
+# define R_PLAYER_COLLECT_IMG	"assets/right_miner_collect1.png,assets/right_miner_collect2.png,\
+assets/right_miner_collect3.png,assets/right_miner_collect4.png,assets/right_miner_collect5.png"
+# define L_PLAYER_COLLECT_IMG	"assets/left_miner_collect1.png,assets/left_miner_collect2.png,\
+assets/left_miner_collect3.png,assets/left_miner_collect4.png,assets/left_miner_collect5.png"
+# define R_PLAYER_DEAD_IMG		"assets/right_miner_die1.png,assets/right_miner_die2.png,\
+assets/right_miner_die3.png,assets/right_miner_die4.png,assets/right_miner_die5.png"
+# define L_PLAYER_DEAD_IMG		"assets/left_miner_die1.png,assets/left_miner_die2.png,\
+assets/left_miner_die3.png,assets/left_miner_die4.png,assets/left_miner_die5.png"
+# define R_ENEMY_IDLE_IMG		"assets/enemy_idle1.png,assets/enemy_idle2.png,\
+assets/enemy_idle3.png,assets/enemy_idle4.png"
 
-typedef struct s_win {
-	void		*mlx_win;
-	int			width;
-	int			height;
-}	t_win;
+typedef struct s_direction {
+	void		**right;
+	void		**left;
+}	t_direction;
 
 typedef struct s_frames {
-	int			player;
-	int			enemy;
+	int			frame_count;
+	int			idling;
+	int			collecting;
+	int			dying;
+	t_direction	idle;
+	t_direction	collect;
+	t_direction	dead;
+	char		direction;
 }	t_frames;
 
 typedef struct s_assets {
 	void		*empty_space;
 	void		*wall;
-	void		*gemstone;
+	void		**gemstones;
 	void		*right_exit;
 	void		*left_exit;
-	void		**player;
-	void		**enemy;
+	t_frames	player;
+	t_frames	enemy;
 	int			width;
 	int			height;
 }	t_assets;
@@ -78,11 +96,17 @@ typedef struct s_map {
 	int			start_position;
 	int			movements;
 	int			game_ended;
+	int			game_over;
 	int			width;
 	int			height;
 	t_assets	assets;
-	t_frames	frames;
 }	t_map;
+
+typedef struct s_win {
+	void		*mlx_win;
+	int			width;
+	int			height;
+}	t_win;
 
 typedef struct s_vars {
 	void		*mlx;
@@ -106,11 +130,14 @@ void	*ft_free(void *ptr);
 void	*ft_free_2d(char **ptr);
 void	*ft_free_3d(char ***ptr);
 char	*get_next_line(int fd);
+int		create_trgb(int t, int r, int g, int b);
 void	ft_parse_map(char *file, char ***map);
 int		ft_is_map_valid(t_map *map);
 void	ft_initialize_assets(t_vars *vars);
-void	ft_render_assets(t_vars *vars);
 int		render_next_frame(t_vars *vars);
+void	ft_render_assets(t_vars *vars);
+void	ft_render_player_frames(int x, int y, t_vars *vars);
+void	ft_render_collectibles(int x, int y, t_vars *vars);
 int		key_hook(int keycode, t_vars *vars);
 int		window_destroyed(t_vars *vars);
 void	ft_quit_program(int status, t_vars *vars);

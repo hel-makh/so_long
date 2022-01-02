@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 22:23:18 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/01/01 16:57:35 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/02 19:50:07 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,16 @@ void	ft_quit_program(int status, t_vars *vars)
 	{
 		mlx_destroy_image(vars->mlx, vars->map.assets.empty_space);
 		mlx_destroy_image(vars->mlx, vars->map.assets.wall);
-		mlx_destroy_image(vars->mlx, vars->map.assets.gemstone);
+		ft_destroy_frames(vars->mlx, vars->map.assets.gemstones);
 		mlx_destroy_image(vars->mlx, vars->map.assets.right_exit);
 		mlx_destroy_image(vars->mlx, vars->map.assets.left_exit);
-		ft_destroy_frames(vars->mlx, vars->map.assets.player);
+		ft_destroy_frames(vars->mlx, vars->map.assets.player.idle.right);
+		ft_destroy_frames(vars->mlx, vars->map.assets.player.idle.left);
+		ft_destroy_frames(vars->mlx, vars->map.assets.player.collect.right);
+		ft_destroy_frames(vars->mlx, vars->map.assets.player.collect.left);
+		ft_destroy_frames(vars->mlx, vars->map.assets.player.dead.right);
+		ft_destroy_frames(vars->mlx, vars->map.assets.player.dead.left);
+		ft_destroy_frames(vars->mlx, vars->map.assets.enemy.idle.right);
 		mlx_destroy_window(vars->mlx, vars->win.mlx_win);
 	}
 	ft_free_2d(vars->map.parsed_map);
