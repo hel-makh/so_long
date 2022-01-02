@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 18:03:53 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/01/01 10:47:28 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/02 15:36:25 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,7 @@ int	ft_is_map_valid(t_map *map)
 			return (0);
 		map->height ++;
 	}
-	if (map->exit < 1 || map->collectibles < 1
-		|| map->start_position < 1 || map->start_position > 1)
+	if (map->exit != 1 || map->collectibles < 1 || map->start_position != 1)
 		return (0);
 	return (1);
 }
