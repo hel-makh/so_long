@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_assets.c                                        :+:      :+:    :+:   */
+/*   ft_render_frames.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 21:07:01 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/01/02 21:21:56 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/02 23:47:27 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,20 @@ void	ft_render_assets(t_vars *vars)
 	}
 }
 
-int	render_next_frame(t_vars *vars)
+static void ft_render_text(t_vars *vars)
+{
+	if (vars->map.game_ended)
+		mlx_string_put(vars->mlx, vars->win.mlx_win, 20, 35,
+			create_trgb(0, 204, 153, 0), "Congratulation, You won!");
+	if (vars->map.assets.player.dying || vars->map.game_over)
+		mlx_string_put(vars->mlx, vars->win.mlx_win, 20, 35,
+			create_trgb(0, 204, 51, 0), "Game over!");
+	mlx_string_put(vars->mlx, vars->win.mlx_win, vars->win.width - 40,
+		vars->win.height - 30, create_trgb(0, 204, 153, 0),
+		ft_itoa(vars->map.movements));
+}
+
+static void	ft_update_player_frames(t_vars *vars)
 {
 	static int	frame_count;
 	int			max_frame_count;
@@ -78,7 +91,7 @@ int	render_next_frame(t_vars *vars)
 	else if (vars->map.assets.player.collecting)
 	{
 		max_frames = ft_arrlen(vars->map.assets.player.collect.right);
-		max_frame_count = 400;
+		max_frame_count = 600;
 	}
 	else
 	{
@@ -86,9 +99,8 @@ int	render_next_frame(t_vars *vars)
 		max_frame_count = 3000;
 	}
 	if (++frame_count < max_frame_count)
-		return (1);
+		return ;
 	frame_count = 0;
-	ft_render_assets(vars);
 	if (++vars->map.assets.player.frame_count >= max_frames)
 	{
 		vars->map.assets.player.frame_count = 0;
@@ -100,17 +112,22 @@ int	render_next_frame(t_vars *vars)
 			vars->map.assets.player.dying = 0;
 		}
 	}
+	ft_render_assets(vars);
+	ft_render_text(vars);
+}
+
+int	render_next_frame(t_vars *vars)
+{
+	static int	frame_count;
+
+	ft_update_player_frames(vars);
+	if (++frame_count < 2000)
+		return (1);
+	frame_count = 0;
 	if (++vars->map.assets.enemy.frame_count
 		>= (int)ft_arrlen(vars->map.assets.enemy.idle.right))
 		vars->map.assets.enemy.frame_count = 0;
-	if (vars->map.game_ended)
-		mlx_string_put(vars->mlx, vars->win.mlx_win, 20, 35,
-			create_trgb(0, 204, 153, 0), "Congratulation, You won!");
-	if (vars->map.assets.player.dying || vars->map.game_over)
-		mlx_string_put(vars->mlx, vars->win.mlx_win, 20, 35,
-			create_trgb(0, 204, 51, 0), "Game over!");
-	mlx_string_put(vars->mlx, vars->win.mlx_win, vars->win.width - 40,
-		vars->win.height - 30, create_trgb(0, 204, 153, 0),
-		ft_itoa(vars->map.movements));
+	ft_render_assets(vars);
+	ft_render_text(vars);
 	return (0);
 }
