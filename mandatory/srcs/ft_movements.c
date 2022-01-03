@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 21:44:54 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/01/01 12:15:38 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/03 17:02:47 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	ft_move_to(char *current_pos, char *new_pos, t_vars *vars)
 		*current_pos = EMPTY_SPACE;
 		*new_pos = START_POSITION;
 		vars->map.movements ++;
-		printf("Current movements: %d\n", vars->map.movements);
+		printf("Movement count: %d\n", vars->map.movements);
 	}
 }
 
