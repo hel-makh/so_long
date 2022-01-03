@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 19:40:09 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/01/02 19:46:55 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/03 14:29:18 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ static void	ft_initialize_sprites(t_vars *vars)
 	frame->dead.left = ft_get_frames(L_PLAYER_DEAD_IMG, vars);
 	frame = &vars->map.assets.enemy;
 	frame->idle.right = ft_get_frames(R_ENEMY_IDLE_IMG, vars);
+	frame->idle.left = ft_get_frames(L_ENEMY_IDLE_IMG, vars);
+	frame->attack.right = ft_get_frames(R_ENEMY_ATTACK_IMG, vars);
+	frame->attack.left = ft_get_frames(L_ENEMY_ATTACK_IMG, vars);
 }
 
 void	ft_initialize_assets(t_vars *vars)
@@ -58,8 +61,7 @@ void	ft_initialize_assets(t_vars *vars)
 	asset = &vars->map.assets;
 	asset->empty_space = mlx_png_file_to_image(vars->mlx,
 			SPACE_IMG, &asset->width, &asset->height);
-	asset->wall = mlx_png_file_to_image(vars->mlx,
-			WALL_IMG, &asset->width, &asset->height);
+	asset->wall = ft_get_frames(WALL_IMG, vars);
 	asset->gemstones = ft_get_frames(GEMSTONE_IMG, vars);
 	asset->right_exit = mlx_png_file_to_image(vars->mlx,
 			R_EXIT_IMG, &asset->width, &asset->height);

@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 15:03:16 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/01/02 21:22:24 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/03 19:01:07 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,14 @@ enum e_components
 	COLLECTIBLE = 67,
 	EXIT = 69,
 	START_POSITION = 80,
-	ENEMY = 78
+	ENEMY = 78,
+	R_ENEMY = 82,
+	L_ENEMY = 76,
+	KILLER = 75
 };
 
 # define SPACE_IMG				"assets/space.png"
-# define WALL_IMG				"assets/wall.png"
+# define WALL_IMG				"assets/wall.png,assets/wall2.png,assets/wall3.png"
 # define GEMSTONE_IMG			"assets/gemstone1.png,assets/gemstone2.png,\
 assets/gemstone3.png,assets/gemstone4.png"
 # define R_EXIT_IMG				"assets/right_exit.png"
@@ -55,11 +58,23 @@ assets/right_miner_collect3.png,assets/right_miner_collect4.png,assets/right_min
 # define L_PLAYER_COLLECT_IMG	"assets/left_miner_collect1.png,assets/left_miner_collect2.png,\
 assets/left_miner_collect3.png,assets/left_miner_collect4.png,assets/left_miner_collect5.png"
 # define R_PLAYER_DEAD_IMG		"assets/right_miner_die1.png,assets/right_miner_die2.png,\
-assets/right_miner_die3.png,assets/right_miner_die4.png,assets/right_miner_die5.png"
+assets/right_miner_die3.png,assets/right_miner_die4.png,assets/right_miner_die5.png,\
+assets/right_miner_die6.png,assets/right_miner_die7.png,assets/right_miner_die8.png,\
+assets/right_miner_die9.png"
 # define L_PLAYER_DEAD_IMG		"assets/left_miner_die1.png,assets/left_miner_die2.png,\
-assets/left_miner_die3.png,assets/left_miner_die4.png,assets/left_miner_die5.png"
-# define R_ENEMY_IDLE_IMG		"assets/enemy_idle1.png,assets/enemy_idle2.png,\
-assets/enemy_idle3.png,assets/enemy_idle4.png"
+assets/left_miner_die3.png,assets/left_miner_die4.png,assets/left_miner_die5.png,\
+assets/left_miner_die6.png,assets/left_miner_die7.png,assets/left_miner_die8.png,\
+assets/left_miner_die9.png"
+# define R_ENEMY_IDLE_IMG		"assets/right_enemy_idle1.png,assets/right_enemy_idle2.png,\
+assets/right_enemy_idle3.png,assets/right_enemy_idle4.png"
+# define L_ENEMY_IDLE_IMG		"assets/left_enemy_idle1.png,assets/left_enemy_idle2.png,\
+assets/left_enemy_idle3.png,assets/left_enemy_idle4.png"
+# define R_ENEMY_ATTACK_IMG		"assets/right_enemy_attack1.png,assets/right_enemy_attack2.png,\
+assets/right_enemy_attack3.png,assets/right_enemy_attack4.png,assets/right_enemy_attack5.png,\
+assets/right_enemy_attack6.png,assets/right_enemy_attack7.png"
+# define L_ENEMY_ATTACK_IMG		"assets/left_enemy_attack1.png,assets/left_enemy_attack2.png,\
+assets/left_enemy_attack3.png,assets/left_enemy_attack4.png,assets/left_enemy_attack5.png,\
+assets/left_enemy_attack6.png,assets/left_enemy_attack7.png"
 
 typedef struct s_direction {
 	void		**right;
@@ -71,15 +86,17 @@ typedef struct s_frames {
 	int			idling;
 	int			collecting;
 	int			dying;
+	int			attacking;
 	t_direction	idle;
 	t_direction	collect;
 	t_direction	dead;
+	t_direction	attack;
 	char		direction;
 }	t_frames;
 
 typedef struct s_assets {
 	void		*empty_space;
-	void		*wall;
+	void		**wall;
 	void		**gemstones;
 	void		*right_exit;
 	void		*left_exit;
@@ -135,9 +152,15 @@ void	ft_parse_map(char *file, char ***map);
 int		ft_is_map_valid(t_map *map);
 void	ft_initialize_assets(t_vars *vars);
 int		render_next_frame(t_vars *vars);
+void	ft_update_player_frames(t_vars *vars);
+void	ft_update_enemy_frames(t_vars *vars);
+void	ft_update_enemy_position(t_vars *vars);
+void	ft_render_text(t_vars *vars);
 void	ft_render_assets(t_vars *vars);
-void	ft_render_player_frames(int x, int y, t_vars *vars);
+void	ft_render_walls(int x, int y, t_vars *vars);
 void	ft_render_collectibles(int x, int y, t_vars *vars);
+void	ft_render_player_frames(int x, int y, t_vars *vars);
+void	ft_render_enemy_frames(int x, int y, int type, t_vars *vars);
 int		key_hook(int keycode, t_vars *vars);
 int		window_destroyed(t_vars *vars);
 void	ft_quit_program(int status, t_vars *vars);
