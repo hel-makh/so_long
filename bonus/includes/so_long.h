@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 15:03:16 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/01/04 16:12:49 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/04 17:27:05 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ enum e_components
 assets/gemstone3.png,assets/gemstone4.png"
 # define R_EXIT_IMG				"assets/right_exit.png"
 # define L_EXIT_IMG 			"assets/left_exit.png"
+# define MOVEMENT_IMG 			"assets/miner_running1.png,assets/miner_running2.png,\
+assets/miner_running3.png,assets/miner_running4.png,assets/miner_running5.png,\
+assets/miner_running6.png,assets/miner_running7.png,assets/miner_running8.png"
 # define R_PLAYER_IDLE_IMG		"assets/right_miner_idle1.png,assets/right_miner_idle2.png,\
 assets/right_miner_idle3.png,assets/right_miner_idle4.png"
 # define L_PLAYER_IDLE_IMG		"assets/left_miner_idle1.png,assets/left_miner_idle2.png,\
@@ -83,6 +86,8 @@ typedef struct s_direction {
 
 typedef struct s_frames {
 	int			frame_count;
+	int			movement_frame_count;
+	int			attack_frame_count;
 	int			collecting;
 	int			dying;
 	int			attacking;
@@ -90,7 +95,6 @@ typedef struct s_frames {
 	t_direction	collect;
 	t_direction	dead;
 	t_direction	attack;
-	int			attack_frame_count;
 	char		direction;
 }	t_frames;
 
@@ -100,6 +104,7 @@ typedef struct s_assets {
 	void		**gemstones;
 	void		*right_exit;
 	void		*left_exit;
+	void		**movement;
 	t_frames	player;
 	t_frames	enemy;
 	int			width;
@@ -154,7 +159,9 @@ void	ft_initialize_assets(t_vars *vars);
 int		render_next_frame(t_vars *vars);
 void	ft_update_player_frames(t_vars *vars);
 void	ft_update_enemy_frames(t_vars *vars);
+void	ft_update_attacking_enemy_frames(t_vars *vars);
 void	ft_update_enemy_position(t_vars *vars);
+void	ft_update_movement_sprites(int count, t_vars *vars);
 void	ft_render_text(t_vars *vars);
 void	ft_render_assets(t_vars *vars);
 void	ft_render_walls(int x, int y, t_vars *vars);

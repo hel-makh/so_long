@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 18:03:53 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/01/04 16:12:57 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/04 18:07:47 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	ft_initialize_map(t_map	*map)
 	map->height = 0;
 	map->assets.player.direction = 'R';
 	map->assets.player.frame_count = 0;
+	map->assets.player.movement_frame_count = 0;
 	map->assets.player.collecting = 0;
 	map->assets.player.dying = 0;
 	map->assets.enemy.frame_count = 0;

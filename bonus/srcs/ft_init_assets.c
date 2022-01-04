@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 19:40:09 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/01/04 11:51:37 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/04 17:05:01 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	ft_initialize_assets(t_vars *vars)
 			R_EXIT_IMG, &asset->width, &asset->height);
 	asset->left_exit = mlx_png_file_to_image(vars->mlx,
 			L_EXIT_IMG, &asset->width, &asset->height);
+	asset->movement = ft_get_frames(MOVEMENT_IMG, vars);
 	ft_initialize_sprites(vars);
 	if (!asset->empty_space || !asset->wall[0] || !asset->gemstones[0]
 		|| !asset->right_exit || !asset->left_exit

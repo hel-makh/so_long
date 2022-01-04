@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:38:16 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/01/04 16:50:51 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/04 18:24:29 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static void	ft_move_enemy_to(char *current_pos, char *new_pos, t_vars *vars)
 	if (*new_pos == WALL || *new_pos == EXIT || *new_pos == COLLECTIBLE
 		|| *new_pos == ENEMY || *new_pos == KILLER
 		|| *new_pos == R_ENEMY || *new_pos == L_ENEMY
-		|| (*new_pos == START_POSITION && vars->map.game_over))
+		|| (*new_pos == START_POSITION
+			&& (vars->map.game_over || vars->map.game_ended)))
 		return ;
 	if (*new_pos == START_POSITION)
 	{

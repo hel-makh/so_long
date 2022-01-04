@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 17:26:34 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/01/04 16:50:08 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/04 18:14:20 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,25 @@ void	ft_update_attacking_enemy_frames(t_vars *vars)
 	}
 	ft_render_assets(vars);
 	ft_render_text(vars);
+}
+
+void	ft_update_movement_sprites(int count, t_vars *vars)
+{
+	static int	frame_count;
+
+	if (count)
+		frame_count ++;
+	else
+		mlx_put_image_to_window(vars->mlx, vars->win.mlx_win,
+			vars->map.assets.movement[vars->map.assets.player.movement_frame_count],
+			vars->win.width - 80, vars->win.height - 50);
+	if (frame_count < 1000)
+		return ;
+	frame_count = 0;
+	if (++vars->map.assets.player.movement_frame_count
+		>= (int)ft_arrlen(vars->map.assets.movement))
+		vars->map.assets.player.movement_frame_count = 0;
+	mlx_put_image_to_window(vars->mlx, vars->win.mlx_win,
+		vars->map.assets.movement[vars->map.assets.player.movement_frame_count],
+		vars->win.width - 80, vars->win.height - 50);
 }

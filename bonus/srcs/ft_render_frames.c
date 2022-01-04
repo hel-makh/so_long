@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 21:07:01 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/01/04 16:43:32 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/04 18:13:37 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ void	ft_render_text(t_vars *vars)
 	if (vars->map.game_over)
 		mlx_string_put(vars->mlx, vars->win.mlx_win, 85, 35,
 			create_trgb(0, 204, 51, 0), "Game over!");
-	mlx_string_put(vars->mlx, vars->win.mlx_win, vars->win.width - 40,
+	ft_update_movement_sprites(0, vars);
+	mlx_string_put(vars->mlx, vars->win.mlx_win, vars->win.width - 45,
 		vars->win.height - 30, create_trgb(0, 204, 153, 0),
 		ft_itoa(vars->map.movements));
 }
@@ -81,5 +82,6 @@ int	render_next_frame(t_vars *vars)
 	ft_update_enemy_frames(vars);
 	ft_update_attacking_enemy_frames(vars);
 	ft_update_enemy_position(vars);
+	ft_update_movement_sprites(1, vars);
 	return (0);
 }
