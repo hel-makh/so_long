@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 21:20:16 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/01/03 19:59:04 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/04 00:15:20 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,8 @@ void	ft_render_walls(int x, int y, t_vars *vars)
 	else if (x != 0 && y != 0
 		&& x != (vars->win.width - vars->map.assets.width)
 		&& y != (vars->win.height - vars->map.assets.height))
-	{
-		mlx_put_image_to_window(vars->mlx, vars->win.mlx_win,
-			vars->map.assets.empty_space, x, y);
 		mlx_put_image_to_window(vars->mlx, vars->win.mlx_win,
 			vars->map.assets.wall[2], x, y);
-	}
 	else
 		mlx_put_image_to_window(vars->mlx, vars->win.mlx_win,
 			vars->map.assets.wall[1], x, y);
