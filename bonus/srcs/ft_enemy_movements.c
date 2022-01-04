@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:38:16 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/01/03 20:00:17 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/04 16:50:51 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ static void	ft_move_enemy_to(char *current_pos, char *new_pos, t_vars *vars)
 	if (*new_pos == START_POSITION)
 	{
 		*current_pos = KILLER;
-		vars->map.assets.enemy.attacking = 1;
 		vars->map.assets.enemy.frame_count = 0;
-		vars->map.assets.player.dying = 1;
+		vars->map.assets.enemy.attack_frame_count = 0;
+		vars->map.assets.enemy.attacking = 1;
 		vars->map.assets.player.frame_count = 0;
+		vars->map.assets.player.dying = 1;
 		return ;
 	}
 	*new_pos = *current_pos;
@@ -66,23 +67,22 @@ void	ft_update_enemy_position(t_vars *vars)
 	if (++frame_count < 12000)
 		return ;
 	frame_count = 0;
-	i = 0;
-	while (vars->map.parsed_map[i])
+	i = -1;
+	while (vars->map.parsed_map[++i])
 	{
-		j = 0;
-		while (vars->map.parsed_map[i][j])
+		j = -1;
+		while (vars->map.parsed_map[i][++j])
 		{
 			if (vars->map.parsed_map[i][j] == ENEMY
-				|| vars->map.parsed_map[i][j] == KILLER
+				|| (vars->map.parsed_map[i][j] == KILLER
+						&& !vars->map.assets.enemy.attacking)
 				|| vars->map.parsed_map[i][j] == R_ENEMY
 				|| vars->map.parsed_map[i][j] == L_ENEMY)
 			{
 				ft_move_enemy(i, j, vars);
-				// ft_render_assets(vars);
-				// ft_render_text(vars);
+				ft_render_assets(vars);
+				ft_render_text(vars);
 			}
-			j ++;
 		}
-		i ++;
 	}
 }

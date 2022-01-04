@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 21:44:54 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/01/03 19:44:21 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/04 16:24:32 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ static void	ft_move_player_to(char *current_pos, char *new_pos, t_vars *vars)
 	if (*new_pos == ENEMY || *new_pos == R_ENEMY || *new_pos == L_ENEMY)
 	{
 		*new_pos = KILLER;
-		vars->map.assets.enemy.attacking = 1;
 		vars->map.assets.enemy.frame_count = 0;
-		vars->map.assets.player.dying = 1;
+		vars->map.assets.enemy.attack_frame_count = 0;
+		vars->map.assets.enemy.attacking = 1;
 		vars->map.assets.player.frame_count = 0;
+		vars->map.assets.player.dying = 1;
 		return ;
 	}
-	if (*new_pos == WALL
-		|| (*new_pos == EXIT && vars->map.collectibles > 0))
+	if (*new_pos == WALL || (*new_pos == EXIT && vars->map.collectibles > 0))
 		return ;
 	if (*new_pos == EXIT && vars->map.collectibles == 0)
 		vars->map.game_ended = 1;

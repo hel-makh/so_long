@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 21:20:16 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/01/04 00:15:20 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/04 16:49:44 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,24 +75,53 @@ void	ft_render_enemy_frames(int x, int y, int type, t_vars *vars)
 	t_direction	*asset;
 	int			frame;
 
-	frame = vars->map.assets.enemy.frame_count;
 	if (type == KILLER && vars->map.assets.enemy.attacking)
+	{
 		asset = &vars->map.assets.enemy.attack;
+		frame = vars->map.assets.enemy.attack_frame_count;
+		if (vars->map.assets.player.direction == 'L')
+			mlx_put_image_to_window(vars->mlx, vars->win.mlx_win,
+				asset->right[frame], x, y);
+		else if (vars->map.assets.player.direction == 'R')
+			mlx_put_image_to_window(vars->mlx, vars->win.mlx_win,
+				asset->left[frame], x, y);
+	}
 	else
+	{
 		asset = &vars->map.assets.enemy.idle;
-	if ((type == KILLER && vars->map.assets.enemy.attacking
-			&& vars->map.assets.player.direction == 'L')
-		|| (type == R_ENEMY
-			&& !vars->map.assets.enemy.attacking))
-		mlx_put_image_to_window(vars->mlx, vars->win.mlx_win,
-			asset->right[frame], x, y);
-	else if ((type == KILLER && vars->map.assets.enemy.attacking
-			&& vars->map.assets.player.direction == 'R')
-		|| (type == L_ENEMY
-			&& !vars->map.assets.enemy.attacking))
-		mlx_put_image_to_window(vars->mlx, vars->win.mlx_win,
-			asset->left[frame], x, y);
-	else if (type == ENEMY || type == KILLER)
-		mlx_put_image_to_window(vars->mlx, vars->win.mlx_win,
-			asset->right[frame], x, y);
+		frame = vars->map.assets.enemy.frame_count;
+		if (type == R_ENEMY)
+			mlx_put_image_to_window(vars->mlx, vars->win.mlx_win,
+				asset->right[frame], x, y);
+		else
+			mlx_put_image_to_window(vars->mlx, vars->win.mlx_win,
+				asset->left[frame], x, y);
+	}
 }
+
+// void	ft_render_enemy_frames(int x, int y, int type, t_vars *vars)
+// {
+// 	t_direction	*asset;
+// 	int			frame;
+
+// 	frame = vars->map.assets.enemy.frame_count;
+// 	if (type == KILLER && vars->map.assets.enemy.attacking)
+// 		asset = &vars->map.assets.enemy.attack;
+// 	else
+// 		asset = &vars->map.assets.enemy.idle;
+// 	if ((type == KILLER && vars->map.assets.enemy.attacking
+// 			&& vars->map.assets.player.direction == 'L')
+// 		|| (type == R_ENEMY
+// 			&& !vars->map.assets.enemy.attacking))
+// 		mlx_put_image_to_window(vars->mlx, vars->win.mlx_win,
+// 			asset->right[frame], x, y);
+// 	else if ((type == KILLER && vars->map.assets.enemy.attacking
+// 			&& vars->map.assets.player.direction == 'R')
+// 		|| (type == L_ENEMY
+// 			&& !vars->map.assets.enemy.attacking))
+// 		mlx_put_image_to_window(vars->mlx, vars->win.mlx_win,
+// 			asset->left[frame], x, y);
+// 	else if (type == ENEMY || type == KILLER)
+// 		mlx_put_image_to_window(vars->mlx, vars->win.mlx_win,
+// 			asset->right[frame], x, y);
+// }

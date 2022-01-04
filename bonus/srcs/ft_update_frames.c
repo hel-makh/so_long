@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 17:26:34 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/01/03 17:29:57 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/04 16:50:08 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,27 +61,31 @@ void	ft_update_player_frames(t_vars *vars)
 void	ft_update_enemy_frames(t_vars *vars)
 {
 	static int	frame_count;
-	int			max_frame_count;
-	int			max_frames;
 
-	if (vars->map.assets.enemy.attacking)
-	{
-		max_frames = ft_arrlen(vars->map.assets.enemy.attack.right);
-		max_frame_count = 1000;
-	}
-	else
-	{
-		max_frames = ft_arrlen(vars->map.assets.enemy.idle.right);
-		max_frame_count = 2000;
-	}
-	if (++frame_count < max_frame_count)
+	if (++frame_count < 2000)
 		return ;
 	frame_count = 0;
-	if (++vars->map.assets.enemy.frame_count >= max_frames)
-	{
+	if (++vars->map.assets.enemy.frame_count
+		>= (int)ft_arrlen(vars->map.assets.enemy.idle.right))
 		vars->map.assets.enemy.frame_count = 0;
-		if (vars->map.assets.enemy.attacking)
-			vars->map.assets.enemy.attacking = 0;
+	ft_render_assets(vars);
+	ft_render_text(vars);
+}
+
+void	ft_update_attacking_enemy_frames(t_vars *vars)
+{
+	static int	frame_count;
+
+	if (!vars->map.assets.enemy.attacking)
+		return ;
+	if (++frame_count < 1000)
+		return ;
+	frame_count = 0;
+	if (++vars->map.assets.enemy.attack_frame_count
+		>= (int)ft_arrlen(vars->map.assets.enemy.attack.right))
+	{
+		vars->map.assets.enemy.attack_frame_count = 0;
+		vars->map.assets.enemy.attacking = 0;
 	}
 	ft_render_assets(vars);
 	ft_render_text(vars);

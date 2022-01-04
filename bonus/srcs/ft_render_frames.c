@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 21:07:01 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/01/03 23:16:48 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/04 16:43:32 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int	render_next_frame(t_vars *vars)
 {
 	ft_update_player_frames(vars);
 	ft_update_enemy_frames(vars);
+	ft_update_attacking_enemy_frames(vars);
 	ft_update_enemy_position(vars);
 	return (0);
 }

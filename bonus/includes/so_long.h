@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 15:03:16 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/01/03 19:01:07 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/04 16:12:49 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ typedef struct s_direction {
 
 typedef struct s_frames {
 	int			frame_count;
-	int			idling;
 	int			collecting;
 	int			dying;
 	int			attacking;
@@ -91,6 +90,7 @@ typedef struct s_frames {
 	t_direction	collect;
 	t_direction	dead;
 	t_direction	attack;
+	int			attack_frame_count;
 	char		direction;
 }	t_frames;
 
