@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 15:03:16 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/01/04 17:27:05 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/05 18:17:00 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
-// # include "../../minilibx_opengl_20191021/mlx.h"
-# include "../../minilibx_mms_20200219/mlx.h"
+# include "../../minilibx/mlx.h"
 # include "../../Libft/libft.h"
 
 enum e_keycodes
@@ -43,41 +42,45 @@ enum e_components
 	KILLER = 75
 };
 
-# define SPACE_IMG				"assets/space.png"
-# define WALL_IMG				"assets/wall.png,assets/wall2.png,assets/wall3.png"
-# define GEMSTONE_IMG			"assets/gemstone1.png,assets/gemstone2.png,\
-assets/gemstone3.png,assets/gemstone4.png"
-# define R_EXIT_IMG				"assets/right_exit.png"
-# define L_EXIT_IMG 			"assets/left_exit.png"
-# define MOVEMENT_IMG 			"assets/miner_running1.png,assets/miner_running2.png,\
-assets/miner_running3.png,assets/miner_running4.png,assets/miner_running5.png,\
-assets/miner_running6.png,assets/miner_running7.png,assets/miner_running8.png"
-# define R_PLAYER_IDLE_IMG		"assets/right_miner_idle1.png,assets/right_miner_idle2.png,\
-assets/right_miner_idle3.png,assets/right_miner_idle4.png"
-# define L_PLAYER_IDLE_IMG		"assets/left_miner_idle1.png,assets/left_miner_idle2.png,\
-assets/left_miner_idle3.png,assets/left_miner_idle4.png"
-# define R_PLAYER_COLLECT_IMG	"assets/right_miner_collect1.png,assets/right_miner_collect2.png,\
-assets/right_miner_collect3.png,assets/right_miner_collect4.png,assets/right_miner_collect5.png"
-# define L_PLAYER_COLLECT_IMG	"assets/left_miner_collect1.png,assets/left_miner_collect2.png,\
-assets/left_miner_collect3.png,assets/left_miner_collect4.png,assets/left_miner_collect5.png"
-# define R_PLAYER_DEAD_IMG		"assets/right_miner_die1.png,assets/right_miner_die2.png,\
-assets/right_miner_die3.png,assets/right_miner_die4.png,assets/right_miner_die5.png,\
-assets/right_miner_die6.png,assets/right_miner_die7.png,assets/right_miner_die8.png,\
-assets/right_miner_die9.png"
-# define L_PLAYER_DEAD_IMG		"assets/left_miner_die1.png,assets/left_miner_die2.png,\
-assets/left_miner_die3.png,assets/left_miner_die4.png,assets/left_miner_die5.png,\
-assets/left_miner_die6.png,assets/left_miner_die7.png,assets/left_miner_die8.png,\
-assets/left_miner_die9.png"
-# define R_ENEMY_IDLE_IMG		"assets/right_enemy_idle1.png,assets/right_enemy_idle2.png,\
-assets/right_enemy_idle3.png,assets/right_enemy_idle4.png"
-# define L_ENEMY_IDLE_IMG		"assets/left_enemy_idle1.png,assets/left_enemy_idle2.png,\
-assets/left_enemy_idle3.png,assets/left_enemy_idle4.png"
-# define R_ENEMY_ATTACK_IMG		"assets/right_enemy_attack1.png,assets/right_enemy_attack2.png,\
-assets/right_enemy_attack3.png,assets/right_enemy_attack4.png,assets/right_enemy_attack5.png,\
-assets/right_enemy_attack6.png,assets/right_enemy_attack7.png"
-# define L_ENEMY_ATTACK_IMG		"assets/left_enemy_attack1.png,assets/left_enemy_attack2.png,\
-assets/left_enemy_attack3.png,assets/left_enemy_attack4.png,assets/left_enemy_attack5.png,\
-assets/left_enemy_attack6.png,assets/left_enemy_attack7.png"
+# define SPACE_IMG				"bonus/assets/space.png"
+# define WALL_IMG				"bonus/assets/wall.png,bonus/assets/wall2.png,\
+bonus/assets/wall3.png"
+# define GEMSTONE_IMG			"bonus/assets/gemstone1.png,bonus/assets/gemstone2.png,\
+bonus/assets/gemstone3.png,bonus/assets/gemstone4.png"
+# define R_EXIT_IMG				"bonus/assets/right_exit.png"
+# define L_EXIT_IMG 			"bonus/assets/left_exit.png"
+# define MOVEMENT_IMG 			"bonus/assets/miner_running1.png,bonus/assets/miner_running2.png,\
+bonus/assets/miner_running3.png,bonus/assets/miner_running4.png,bonus/assets/miner_running5.png,\
+bonus/assets/miner_running6.png,bonus/assets/miner_running7.png,\
+bonus/assets/miner_running8.png"
+# define R_PLAYER_IDLE_IMG		"bonus/assets/right_miner_idle1.png,bonus/assets/right_miner_idle2.png,\
+bonus/assets/right_miner_idle3.png,bonus/assets/right_miner_idle4.png"
+# define L_PLAYER_IDLE_IMG		"bonus/assets/left_miner_idle1.png,bonus/assets/left_miner_idle2.png,\
+bonus/assets/left_miner_idle3.png,bonus/assets/left_miner_idle4.png"
+# define R_PLAYER_COLLECT_IMG	"bonus/assets/right_miner_collect1.png,bonus/assets/right_miner_collect2.png,\
+bonus/assets/right_miner_collect3.png,bonus/assets/right_miner_collect4.png,\
+bonus/assets/right_miner_collect5.png"
+# define L_PLAYER_COLLECT_IMG	"bonus/assets/left_miner_collect1.png,bonus/assets/left_miner_collect2.png,\
+bonus/assets/left_miner_collect3.png,bonus/assets/left_miner_collect4.png,\
+bonus/assets/left_miner_collect5.png"
+# define R_PLAYER_DEAD_IMG		"bonus/assets/right_miner_die1.png,bonus/assets/right_miner_die2.png,\
+bonus/assets/right_miner_die3.png,bonus/assets/right_miner_die4.png,bonus/assets/right_miner_die5.png,\
+bonus/assets/right_miner_die6.png,bonus/assets/right_miner_die7.png,bonus/assets/right_miner_die8.png,\
+bonus/assets/right_miner_die9.png"
+# define L_PLAYER_DEAD_IMG		"bonus/assets/left_miner_die1.png,bonus/assets/left_miner_die2.png,\
+bonus/assets/left_miner_die3.png,bonus/assets/left_miner_die4.png,bonus/assets/left_miner_die5.png,\
+bonus/assets/left_miner_die6.png,bonus/assets/left_miner_die7.png,bonus/assets/left_miner_die8.png,\
+bonus/assets/left_miner_die9.png"
+# define R_ENEMY_IDLE_IMG		"bonus/assets/right_enemy_idle1.png,bonus/assets/right_enemy_idle2.png,\
+bonus/assets/right_enemy_idle3.png,bonus/assets/right_enemy_idle4.png"
+# define L_ENEMY_IDLE_IMG		"bonus/assets/left_enemy_idle1.png,bonus/assets/left_enemy_idle2.png,\
+bonus/assets/left_enemy_idle3.png,bonus/assets/left_enemy_idle4.png"
+# define R_ENEMY_ATTACK_IMG		"bonus/assets/right_enemy_attack1.png,bonus/assets/right_enemy_attack2.png,\
+bonus/assets/right_enemy_attack3.png,bonus/assets/right_enemy_attack4.png,bonus/assets/right_enemy_attack5.png,\
+bonus/assets/right_enemy_attack6.png,bonus/assets/right_enemy_attack7.png"
+# define L_ENEMY_ATTACK_IMG		"bonus/assets/left_enemy_attack1.png,bonus/assets/left_enemy_attack2.png,\
+bonus/assets/left_enemy_attack3.png,bonus/assets/left_enemy_attack4.png,bonus/assets/left_enemy_attack5.png,\
+bonus/assets/left_enemy_attack6.png,bonus/assets/left_enemy_attack7.png"
 
 typedef struct s_direction {
 	void		**right;
