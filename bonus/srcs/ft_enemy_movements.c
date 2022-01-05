@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 18:38:16 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/01/04 18:24:29 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/05 15:04:33 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,22 +68,22 @@ void	ft_update_enemy_position(t_vars *vars)
 	if (++frame_count < 12000)
 		return ;
 	frame_count = 0;
-	i = -1;
-	while (vars->map.parsed_map[++i])
+	i = 0;
+	while (vars->map.parsed_map[i])
 	{
-		j = -1;
-		while (vars->map.parsed_map[i][++j])
+		j = 0;
+		while (vars->map.parsed_map[i][j])
 		{
 			if (vars->map.parsed_map[i][j] == ENEMY
 				|| (vars->map.parsed_map[i][j] == KILLER
 						&& !vars->map.assets.enemy.attacking)
 				|| vars->map.parsed_map[i][j] == R_ENEMY
 				|| vars->map.parsed_map[i][j] == L_ENEMY)
-			{
 				ft_move_enemy(i, j, vars);
-				ft_render_assets(vars);
-				ft_render_text(vars);
-			}
+			j ++;
 		}
+		i ++;
 	}
+	ft_render_assets(vars);
+	ft_render_text(vars);
 }
