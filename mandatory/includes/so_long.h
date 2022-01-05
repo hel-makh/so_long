@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 15:03:16 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/01/01 22:32:14 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/05 18:15:20 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
-// # include "../../minilibx_opengl_20191021/mlx.h"
-# include "../../minilibx_mms_20200219/mlx.h"
+# include "../../minilibx/mlx.h"
 # include "../../Libft/libft.h"
 
 enum e_keycodes
@@ -39,12 +38,12 @@ enum e_components
 	START_POSITION = 80
 };
 
-# define SPACE_IMG "./assets/space.png"
-# define WALL_IMG "./assets/wall.png"
-# define GEMSTONE_IMG "./assets/gemstone.png"
-# define R_EXIT_IMG "./assets/right_exit.png"
-# define L_EXIT_IMG "./assets/left_exit.png"
-# define PLAYER_IMG "./assets/miner.png"
+# define SPACE_IMG "mandatory/assets/space.png"
+# define WALL_IMG "mandatory/assets/wall.png"
+# define GEMSTONE_IMG "mandatory/assets/gemstone.png"
+# define R_EXIT_IMG "mandatory/assets/right_exit.png"
+# define L_EXIT_IMG "mandatory/assets/left_exit.png"
+# define PLAYER_IMG "mandatory/assets/miner.png"
 
 typedef struct s_win {
 	void		*mlx_win;

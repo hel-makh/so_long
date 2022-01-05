@@ -6,21 +6,11 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 15:05:51 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/01/01 22:07:22 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/05 18:25:58 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/so_long.h"
-
-#include "srcs/ft_strcpy.c"
-#include "srcs/ft_free.c"
-#include "srcs/ft_strnjoin.c"
-#include "srcs/get_next_line.c"
-#include "srcs/ft_parse_map.c"
-#include "srcs/ft_validate_map.c"
-#include "srcs/ft_assets.c"
-#include "srcs/ft_movements.c"
-#include "srcs/ft_quit_program.c"
 
 static void	ft_so_long(t_vars *vars)
 {
