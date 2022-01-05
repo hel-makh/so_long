@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 21:07:01 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/01/04 18:13:37 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/05 16:07:03 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	ft_render_text(t_vars *vars)
 {
 	if (vars->map.game_ended)
 		mlx_string_put(vars->mlx, vars->win.mlx_win, 20, 35,
-			create_trgb(0, 204, 153, 0), "Congratulation, You won!");
+			create_trgb(0, 204, 153, 0), "Congratulations, You won!");
 	if (vars->map.game_over)
 		mlx_string_put(vars->mlx, vars->win.mlx_win, 85, 35,
 			create_trgb(0, 204, 51, 0), "Game over!");
