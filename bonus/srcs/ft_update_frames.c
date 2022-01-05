@@ -6,7 +6,7 @@
 /*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 17:26:34 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/01/04 18:14:20 by hel-makh         ###   ########.fr       */
+/*   Updated: 2022/01/05 15:06:04 by hel-makh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,8 @@ void	ft_update_movement_sprites(int count, t_vars *vars)
 		frame_count ++;
 	else
 		mlx_put_image_to_window(vars->mlx, vars->win.mlx_win,
-			vars->map.assets.movement[vars->map.assets.player.movement_frame_count],
+			vars->map.assets.movement
+		[vars->map.assets.player.movement_frame_count],
 			vars->win.width - 80, vars->win.height - 50);
 	if (frame_count < 1000)
 		return ;
